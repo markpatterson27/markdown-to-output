@@ -14,8 +14,13 @@ with:
 
 ## Inputs
 
-| Name | Required | Default | Description |
+| Input Name | Required | Default | Description |
 |---|---|---|---|
 | `filepath` | yes | none | Path to markdown file. |
 
 ## Outputs
+
+| Output Name | Description |
+|---|---|
+| `attributes` | Array of parsed front matter attributes. |
+| `body` | Main body content of file. |

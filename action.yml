@@ -4,6 +4,11 @@ inputs:
   filepath:  # id of input
     description: 'path to markdown file to be read and parsed'
     required: true
+outputs:
+  attributes:
+    description: 'array of parsed front matter attributes'
+  body:
+    description: 'main body content of file'
 
 runs:
   using: 'node12'
