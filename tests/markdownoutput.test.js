@@ -1,4 +1,4 @@
-const { test, expect } = require('@jest/globals');
+const { test, expect, beforeEach } = require('@jest/globals');
 const { readTextFile, parseTemplate, parseMatter } = require('../src/markdownoutput');
 
 const testContent = {
@@ -27,9 +27,39 @@ Tasks to complete before initial release.
 
 // test readFile
 describe("readFile function", () => {
+    beforeEach(() => {
+        process.env.GITHUB_WORKSPACE = __dirname;
+    });
+
+    // test throws error if input not string
+    test('throws not string', () => {
+        const input = 5;
+        // expect(parseMatter(5)).toThrow('content not a string');
+        expect(() => {readTextFile(input);}).toThrow(TypeError);
+        expect(() => {readTextFile(input);}).toThrow("File path not a string");
+    });
+
     // test throws file not found error
-    // test throws file not readable error
-    // test reads mock file correctly
+    test('throws file not found', () => {
+        const input = 'unknown.md';
+        const consoleSpy = jest.spyOn(console, 'error');
+        
+        // expect(readTextFile(input)).rejects.toThrow('ENOENT');
+        
+        expect(() => {readTextFile(input);}).toThrow('ENOENT');
+        expect(consoleSpy).toHaveBeenCalled();
+    });
+
+    // test throws error if not text file
+    // #TODO
+
+    // test reads file correctly
+    test('reads file contents', () => {
+        const filePath = '../examples/project.md';
+        const expected = testContent.project;
+        expect(readTextFile(filePath)).toEqual(expected);
+
+    });
 });
 
 // test parseTemplate
