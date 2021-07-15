@@ -37,7 +37,7 @@ function readTextFile(filePath) {
 
 // parse through templating
 function parseTemplate(content) {
-    return ''; // parsed content
+    return content; // parsed content
 }
 
 // parse through frontmatter
