@@ -24,7 +24,8 @@
   "homepage": "https://github.com/markpatterson27/markdown-to-output#readme",
   "dependencies": {
     "@actions/core": "^1.4.0",
-    "front-matter": "^4.0.2"
+    "front-matter": "^4.0.2",
+    "slugify": "^1.5.3"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.28.6",

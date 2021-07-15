@@ -83,11 +83,22 @@ This is some text that includes '$pecial characters'.
 
 And multiple lines.`;
 
+        // unslugged
+        // const expected = {
+        //     attributes: {
+        //         't!tle': 'Front Matter Test',
+        //         type: 'special characters match \'n stuff',
+        //         '🌎 ground control': 'lift-off 🚀'
+        //     },
+        //     body: 'This is some text that includes \'$pecial characters\'.\n\nAnd multiple lines.'
+        // };
+
+        // slugged
         const expected = {
             attributes: {
-                't!tle': 'Front Matter Test',
+                'ttle': 'Front Matter Test',
                 type: 'special characters match \'n stuff',
-                '🌎 ground control': 'lift-off 🚀'
+                'ground-control': 'lift-off 🚀'
             },
             body: 'This is some text that includes \'$pecial characters\'.\n\nAnd multiple lines.'
         };

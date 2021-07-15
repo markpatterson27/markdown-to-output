@@ -1,4 +1,5 @@
 const fm = require('front-matter');
+const slugify = require("slugify");
 
 // read in markdown file
 function readFile(filePath) {
@@ -25,12 +26,19 @@ function parseMatter(content) {
 
     // parse content
     const { attributes, body } = fm(content);
+
+    // slugify attributes
+    let slugAttributes = {};
+    for (let k in attributes) {
+        slugAttributes[slugify(k, { lower: true, strict: true })] = attributes[k];
+    }
+
     const parsed = {
-        attributes: attributes,
+        attributes: slugAttributes,
         body: body
     };
 
-    console.log(parsed);
+    // console.log(parsed);
 
     return parsed; // parsed content
 
