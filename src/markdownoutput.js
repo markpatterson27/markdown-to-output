@@ -1,3 +1,5 @@
+const fm = require('front-matter');
+
 // read in markdown file
 function readFile(filePath) {
     // throw error if file not found
