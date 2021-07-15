@@ -1,6 +1,30 @@
 const { test, expect } = require('@jest/globals');
 const { readTextFile, parseTemplate, parseMatter } = require('../src/markdownoutput');
 
+const testContent = {
+    noFM: "This is some text without front matter content.",
+    basicFM: `---
+title: Front Matter Test
+type: basic attributes and body match
+---
+This is some text that includes front matter content.`,
+    specialChars: `---
+t!tle: Front Matter Test
+type: special characters match 'n stuff
+🌎 ground control: lift-off 🚀
+---
+This is some text that includes '$pecial characters'.
+
+And multiple lines.`,
+    project: `---
+title: 'Launch :rocket:'
+columns: 'To do, In progress, Done'
+---
+
+Tasks to complete before initial release.
+`
+}
+
 // test readFile
 describe("readFile function", () => {
     // test throws file not found error
@@ -42,7 +66,7 @@ describe("parseMatter function", () => {
 
     // test no front matter in string
     test("returns body with empty parsed attributes", () => {
-        const input = "This is some text without front matter content.";
+        const input = testContent.noFM;
 
         const expected = {
             attributes: {},
@@ -54,11 +78,7 @@ describe("parseMatter function", () => {
 
     // test populated string
     test("returns parsed attributes and body", () => {
-        const input = `---
-title: Front Matter Test
-type: basic attributes and body match
----
-This is some text that includes front matter content.`;
+        const input = testContent.basicFM;
 
         const expected = {
             attributes: {
@@ -73,14 +93,7 @@ This is some text that includes front matter content.`;
 
     // test special characters string
     test("returns special characters in attributes and body", () => {
-        const input = `---
-t!tle: Front Matter Test
-type: special characters match 'n stuff
-🌎 ground control: lift-off 🚀
----
-This is some text that includes '$pecial characters'.
-
-And multiple lines.`;
+        const input = testContent.specialChars;
 
         // unslugged
         // const expected = {
