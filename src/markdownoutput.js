@@ -16,7 +16,24 @@ function parseTemplate(content) {
 
 // parse through frontmatter
 function parseMatter(content) {
-    return ''; // parsed content
+
+    // throw error if not a string
+    if (typeof content !== 'string') {
+        // throw new Error('content not a string');
+        throw new TypeError("Content not a string");
+    }
+
+    // parse content
+    const { attributes, body } = fm(content);
+    const parsed = {
+        attributes: attributes,
+        body: body
+    };
+
+    console.log(parsed);
+
+    return parsed; // parsed content
+
 }
 
 module.exports = readFile;
