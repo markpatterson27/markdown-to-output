@@ -1,6 +1,5 @@
 const { test, expect } = require('@jest/globals');
-const parseMatter = require('../src/markdownoutput');
-const mto = require('../src/markdownoutput');
+const { readTextFile, parseTemplate, parseMatter } = require('../src/markdownoutput');
 
 // test readFile
 describe("readFile function", () => {

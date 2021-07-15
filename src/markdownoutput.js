@@ -2,7 +2,10 @@ const fm = require('front-matter');
 const slugify = require("slugify");
 
 // read in markdown file
-function readFile(filePath) {
+function readTextFile(filePath) {
+
+    // filePath will be relative to repo root, not to action workspace. need to use full path
+
     // throw error if file not found
 
     // throw error if file unreadable
@@ -44,6 +47,4 @@ function parseMatter(content) {
 
 }
 
-module.exports = readFile;
-module.exports = parseTemplate;
-module.exports = parseMatter;
+module.exports = { readTextFile, parseTemplate, parseMatter };
