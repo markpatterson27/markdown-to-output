@@ -7,9 +7,21 @@ GitHub Action that parses a markdown file to action output. Supports frontmatter
 ## Usage
 
 ```yaml
-uses: markpatterson27/markdown-to-output@master
-with:
-  filepath: examples/project.md
+name: Markdown to Output
+on: push
+jobs:
+  markdown-output:
+    name: Markdown to Output
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 
+      - uses: markpatterson27/markdown-to-output@main
+        id: mto
+        with:
+          filepath: examples/project.md
+      - run: |
+          echo ${{ steps.mto.outputs.attributes }}
+          echo ${{ steps.mto.outputs.body }}
 ```
 
 ## Inputs
