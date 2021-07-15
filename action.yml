@@ -1,0 +1,10 @@
+name: 'Markdown to Output'
+description: 'Read a markdown file to action output.'
+inputs:
+  filepath:  # id of input
+    description: 'path to markdown file to be read and parsed'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'src/index.js'

@@ -1,0 +1,26 @@
+{
+  "name": "markdown-to-output",
+  "version": "1.0.0",
+  "description": "GitHub Action that parses a markdown file to action output. Supports frontmatter and templating.",
+  "main": "src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markpatterson27/markdown-to-output.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markpatterson27/markdown-to-output/issues"
+  },
+  "homepage": "https://github.com/markpatterson27/markdown-to-output#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0"
+  }
+}
