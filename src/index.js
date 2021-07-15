@@ -7,16 +7,25 @@ async function run() {
         const filePath = core.getInput('filepath');
 
         // read in markdown file
+        const fileContents = mto.readTextFile(filePath);
 
         // pass to templating
+        const parsedTemplates = mto.parseTemplate(fileContents);
 
         // pass to frontmatter
+        const parsedFM = mto.parseMatter(parsedTemplates);
 
         // process outputs
+        core.setOutput('attributes', parsedFM.attributes);
+        core.setOutput('body', parsedFM.body);
 
     } catch (error) {
         core.setFailed(error.message);
     }
 }
 
-run();
+if (require.main === module) {
+    run();
+}
+
+module.exports = { run };
