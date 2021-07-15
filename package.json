@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint .",
     "build": "ncc build ./src/index.js -o dist --source-map --license licenses.txt",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.28.6",
-    "eslint": "^7.30.0"
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6"
   }
 }

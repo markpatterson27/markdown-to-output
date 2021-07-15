@@ -7,7 +7,7 @@ GitHub Action that parses a markdown file to action output. Supports frontmatter
 ```yaml
 uses: markpatterson27/markdown-to-output@master
 with:
-  filepath: # TODO - example markdown file
+  filepath: examples/project.md
 ```
 
 ## Inputs
