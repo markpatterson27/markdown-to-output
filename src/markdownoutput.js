@@ -25,7 +25,11 @@ function readTextFile(filePath) {
     // }
 
     try {
-        const contents = fs.readFileSync(fullPath, {encoding: 'utf-8'});
+        let contents = fs.readFileSync(fullPath, {encoding: 'utf-8'});
+
+        // remove CR for consistency across platforms
+        contents = contents.replace(/\r/g, '');
+
         return contents;
     } catch (error) {
         if (error.code === 'ENOENT') {
