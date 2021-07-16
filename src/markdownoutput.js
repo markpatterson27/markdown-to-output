@@ -34,6 +34,7 @@ function readTextFile(filePath) {
     } catch (error) {
         if (error.code === 'ENOENT') {
             console.error(`File ${filePath} not found! You may need to use the actions/checkout action to clone the repository first.`);
+            // #TODO add core log message
         }
         throw error;
     }
