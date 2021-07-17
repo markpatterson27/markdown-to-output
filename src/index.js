@@ -11,7 +11,9 @@ async function run() {
         const fileContents = mto.readTextFile(filePath);
 
         // templates
-        const templateVariables = {};
+        const templateVariables = {
+            ...github.context
+        };
 
         // pass to templating
         const parsedTemplates = mto.parseTemplate(fileContents, templateVariables);
