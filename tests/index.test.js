@@ -64,7 +64,15 @@ describe("action integration", () => {
     });
 
     // parse templated file content
-    // #TODO
+    test('sets body and attributes outputs with templates', () => {
+        process.env['INPUT_FILEPATH'] = 'tests/test-files/templates.md';
+        action.run();
+        expect(core.setOutput).toBeCalledWith("attributes", {
+            title: 'Templating Test',
+            person: 'jest tests'
+        });
+        expect(core.setOutput).toBeCalledWith("body", 'The test action is just tesing.\n');
+    });
 });
 
 // shows how the runner will run a javascript action with env / stdout protocol
