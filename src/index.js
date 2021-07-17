@@ -9,8 +9,11 @@ async function run() {
         // read in markdown file
         const fileContents = mto.readTextFile(filePath);
 
+        // templates
+        const templateVariables = {};
+
         // pass to templating
-        const parsedTemplates = mto.parseTemplate(fileContents);
+        const parsedTemplates = mto.parseTemplate(fileContents, templateVariables);
 
         // pass to frontmatter
         const parsedFM = mto.parseMatter(parsedTemplates);

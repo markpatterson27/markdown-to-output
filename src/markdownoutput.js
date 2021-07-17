@@ -41,7 +41,14 @@ function readTextFile(filePath) {
 }
 
 // parse through templating
-function parseTemplate(content) {
+function parseTemplate(content, templateVariables) {
+
+    // configure templating
+
+    // add additional templates
+
+    // render content
+
     return content; // parsed content
 }
 
