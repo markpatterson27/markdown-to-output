@@ -1,4 +1,5 @@
 const core = require('@actions/core');
+const github = require('@actions/github');
 const mto = require('./markdownoutput');
 
 // most @actions toolkit packages have async methods
