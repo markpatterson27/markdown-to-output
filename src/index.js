@@ -17,6 +17,9 @@ async function run() {
 
         // process outputs
         core.setOutput('attributes', parsedFM.attributes);
+        for (let k in parsedFM.attributes) {
+            core.setOutput(k, parsedFM.attributes[k]);
+        }
         core.setOutput('body', parsedFM.body);
 
     } catch (error) {
