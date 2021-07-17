@@ -22,13 +22,88 @@ jobs:
     - run: npm test
 
   # test action works running from the graph
-  integration-test:
+  integration-tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    # test no file throws error
     - uses: ./
-      id: action
+      name: action - no file
+      id: action-no-file
+      continue-on-error: true
+    - name: test - no file
+      if: ${{ steps.action-no-file.outcome != 'failure' }}
+      run: |
+        echo "::error::Test fail - no file doesn't trigger error"
+        exit 1
+
+    # file not found throws error
+    - uses: ./
+      name: action - file not found
+      id: action-file-not-found
       with:
-        filepath: examples/project.md
-    - run: echo ${{ steps.action.outputs.attributes }}
-    - run: echo ${{ steps.action.outputs.body }}
+        filepath: unknown.md
+      continue-on-error: true
+    - name: test - file not found
+      if: ${{ steps.action-file-not-found.outcome != 'failure' }}
+      run: |
+        echo "::error::Test fail - missing file doesn't trigger error"
+        exit 1
+
+    # empty file results in empty step content
+    - name: setup - empty file
+      run: touch empty.md
+    - uses: ./
+      name: action - empty file
+      id: action-empty-file
+      with:
+        filepath: empty.md
+    - name: test - empty file
+      run: |
+        assert """${{ steps.action-empty-file.outputs.attributes }}""" == "{}"
+        assert """${{ steps.action-empty-file.outputs.body }}""" == ""
+      shell: python
+
+    # simple file renders correctly
+    #TODO
+
+    # front matter file renders correctly
+    - name: setup - fm file
+      run: |
+        echo -n "---
+        title: Front Matter file
+        ---
+        body content" > fm.md
+    - uses: ./
+      name: action - fm file
+      id: action-fm-file
+      with:
+        filepath: fm.md
+    - name: test - fm file
+      run: |
+        assert """${{ steps.action-fm-file.outputs.attributes }}""" == "{\"title\":\"Front Matter file\"}"
+        assert """${{ steps.action-fm-file.outputs.title }}""" == "Front Matter file"
+        assert """${{ steps.action-fm-file.outputs.body }}""" == "body content"
+      shell: python
+
+    # template file renders correctly
+    - name: setup - templated file
+      run: |
+        echo -n "---
+        title: Templated file
+        ref: {{ ref }}
+        ---
+        Generated in {{ job }}" > templated.md
+    - uses: ./
+      name: action - templated file
+      id: action-templated-file
+      with:
+        filepath: templated.md
+    - name: test - templated file
+      run: |
+        assert """${{ steps.action-templated-file.outputs.attributes }}""" == "{\"title\":\"Templated file\",\"ref\":\"${{ github.ref }}\"}"
+        assert """${{ steps.action-templated-file.outputs.title }}""" == "Templated file"
+        assert """${{ steps.action-templated-file.outputs.ref }}""" == "${{ github.ref }}"
+        assert """${{ steps.action-templated-file.outputs.body }}""" == "Generated in integration-tests"
+      shell: python
