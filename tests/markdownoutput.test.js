@@ -22,8 +22,20 @@ columns: 'To do, In progress, Done'
 ---
 
 Tasks to complete before initial release.
+`,
+    templateChars: `---
+title: Templating Test
+person: {{ actor }}
+---
+The {{ action }} action is just tesing.
 `
-}
+};
+const testTemplates = {
+    basic: {
+        action: 'test',
+        actor: 'jest tests'
+    }
+};
 
 // test readFile
 describe("readFile function", () => {
@@ -63,8 +75,62 @@ describe("readFile function", () => {
 // test parseTemplate
 describe("parseTemplate function", () => {
     // test throws error if input not string
+    test('throws not string', () => {
+        const content = 5;
+        const templates = {};
+        // expect(parseMatter(5)).toThrow('content not a string');
+        expect(() => {parseTemplate(content, templates);}).toThrow(TypeError);
+        expect(() => {parseTemplate(content, templates);}).toThrow("Content not a string");
+    });
+
+    // test throws error if templates not object
+    test('throws not object', () => {
+        const content = 'string';
+        const templates = 'string';
+        // expect(parseMatter(5)).toThrow('content not a string');
+        expect(() => {parseTemplate(content, templates);}).toThrow(TypeError);
+        expect(() => {parseTemplate(content, templates);}).toThrow("Templates not an object");
+    });
+
     // test empty string
-    // test populated string
+    test('returns empty string', () => {
+        const content = '';
+        const templates = testTemplates.basic;
+
+        const expected = '';
+
+        expect(parseTemplate(content, templates)).toEqual(expected);
+    });
+
+    // test populated string, empty templates
+    test('returns detemplated string', () => {
+        const content = testContent.templateChars;
+        const templates = {};
+
+        const expected = `---
+title: Templating Test
+person: 
+---
+The  action is just tesing.
+`;
+
+        expect(parseTemplate(content, templates)).toEqual(expected);
+    });
+
+    // test populated string, populated templates
+    test('returns parsed string', () => {
+        const content = testContent.templateChars;
+        const templates = testTemplates.basic;
+
+        const expected = `---
+title: Templating Test
+person: jest tests
+---
+The test action is just tesing.
+`;
+
+        expect(parseTemplate(content, templates)).toEqual(expected);
+    });
 });
 
 // test parseMatter
