@@ -8,7 +8,6 @@ const action = require('../src/index');
 describe("action integration", () => {
     beforeEach(() => {
         jest.spyOn(core, "setOutput").mockImplementation();
-        process.env.GITHUB_WORKSPACE = path.join(__dirname, '..');
         jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 

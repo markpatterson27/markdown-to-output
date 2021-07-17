@@ -40,7 +40,6 @@ const testTemplates = {
 // test readFile
 describe("readFile function", () => {
     beforeEach(() => {
-        process.env.GITHUB_WORKSPACE = __dirname;
     });
 
     // test throws error if input not string
@@ -65,7 +64,7 @@ describe("readFile function", () => {
 
     // test reads file correctly
     test('reads file contents', () => {
-        const filePath = '../examples/project.md';
+        const filePath = 'examples/project.md';
         const expected = testContent.project;
         expect(readTextFile(filePath)).toEqual(expected);
 
