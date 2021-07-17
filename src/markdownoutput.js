@@ -44,13 +44,37 @@ function readTextFile(filePath) {
 // parse through templating
 function parseTemplate(content, templateVariables) {
 
+    // throw error if not a string
+    if (typeof content !== 'string') {
+        // throw new Error('content not a string');
+        throw new TypeError("Content not a string");
+    }
+    // throw error if not an object
+    if (typeof templateVariables !== 'object') {
+        // throw new Error('content not a string');
+        throw new TypeError("Templates not an object");
+    }
+
     // configure templating
+    nunjucks.configure({ 
+        autoescape: false,
+        throwOnUndefined: false
+    });
 
     // add additional templates
+    templateVariables = {
+        ...templateVariables,
+        env: process.env
+    }
+
+    // console.log(templateVariables);
 
     // render content
+    const parsed = nunjucks.renderString(content, templateVariables);
 
-    return content; // parsed content
+    // console.log(parsed);
+
+    return parsed;
 }
 
 // parse through frontmatter
