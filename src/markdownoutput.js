@@ -1,5 +1,6 @@
 const fm = require('front-matter');
 const slugify = require("slugify");
+const nunjucks = require('nunjucks');
 const fs = require("fs");
 const path = require("path");
 
