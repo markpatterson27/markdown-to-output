@@ -79,7 +79,7 @@ describe("action integration", () => {
 test('test runs', () => {
     // process.env['INPUT_FILEPATH'] = path.join(__dirname, '../examples/project.md');  // #TODO process spaces in paths
     // const ip = path.join(__dirname, '../src/index.js');
-    process.env['INPUT_FILEPATH'] = 'examples/project.md';
+    process.env['INPUT_FILEPATH'] = 'examples/issue.md';
     process.env.GITHUB_WORKSPACE = path.join(__dirname, '..');
     const ip = 'src/index.js';
     console.log(ip);
