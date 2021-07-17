@@ -1,8 +1,8 @@
 const process = require('process');
 const cp = require('child_process');
 const path = require('path');
-const core = require("@actions/core");
-const action = require("../src/index");
+const core = require('@actions/core');
+const action = require('../src/index');
 
 // test outputs triggered
 describe("action integration", () => {

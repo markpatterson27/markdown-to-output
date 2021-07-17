@@ -1,8 +1,8 @@
 const fm = require('front-matter');
-const slugify = require("slugify");
+const slugify = require('slugify');
 const nunjucks = require('nunjucks');
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 // read in markdown file
 function readTextFile(filePath) {
