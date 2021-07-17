@@ -42,12 +42,10 @@ describe("readFile function", () => {
     // test throws file not found error
     test('throws file not found', () => {
         const input = 'unknown.md';
-        const consoleSpy = jest.spyOn(console, 'error');
-        
+        jest.spyOn(console, 'error').mockImplementation(() => {});
         // expect(readTextFile(input)).rejects.toThrow('ENOENT');
-        
         expect(() => {readTextFile(input);}).toThrow('ENOENT');
-        expect(consoleSpy).toHaveBeenCalled();
+        expect(console.error).toHaveBeenCalled();
     });
 
     // test throws error if not text file
