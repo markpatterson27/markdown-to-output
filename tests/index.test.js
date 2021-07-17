@@ -9,26 +9,20 @@ describe("action integration", () => {
     beforeEach(() => {
         jest.spyOn(core, "setOutput").mockImplementation();
         process.env.GITHUB_WORKSPACE = path.join(__dirname, '..');
+        jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterEach(() => {
         jest.restoreAllMocks();
     });
 
-    // test throw error if input not string
-    test('throws not string', () => {
-        process.env['INPUT_FILEPATH'] = 5;
-        expect(action.run()).rejects.toThrow(TypeError);
-        expect(action.run()).rejects.toThrow("File path not a string");
-    });
-
     // test throws file not found error
-    test('throws file not found', () => {
+    test('sets failed if file not found', () => {
+        jest.spyOn(core, "setFailed").mockImplementation();
         process.env['INPUT_FILEPATH'] = 'unknown.md';
-        const consoleSpy = jest.spyOn(console, 'error');
-        
-        expect(action.run()).rejects.toThrow('ENOENT');
-        expect(consoleSpy).toHaveBeenCalled();
+        action.run();
+        expect(core.setFailed).toHaveBeenCalled();
+
     });
 
     // parse empty file
