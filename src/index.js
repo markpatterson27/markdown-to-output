@@ -5,7 +5,7 @@ const mto = require('./markdownoutput');
 // most @actions toolkit packages have async methods
 async function run() {
     try {
-        const filePath = core.getInput('filepath');
+        const filePath = core.getInput('filepath', {required: true});
 
         // read in markdown file
         const fileContents = mto.readTextFile(filePath);

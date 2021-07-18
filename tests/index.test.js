@@ -15,13 +15,20 @@ describe("action integration", () => {
         jest.restoreAllMocks();
     });
 
+    test('no input val', () => {
+        jest.spyOn(core, "setFailed").mockImplementation();
+        process.env['INPUT_FILEPATH'] = '';
+        action.run();
+        expect(core.setFailed).toHaveBeenCalled();
+        expect(core.setFailed).toBeCalledWith('Input required and not supplied: filepath');
+    });
+
     // test throws file not found error
     test('sets failed if file not found', () => {
         jest.spyOn(core, "setFailed").mockImplementation();
         process.env['INPUT_FILEPATH'] = 'unknown.md';
         action.run();
         expect(core.setFailed).toHaveBeenCalled();
-
     });
 
     // parse empty file
