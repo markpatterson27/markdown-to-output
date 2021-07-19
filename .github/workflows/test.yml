@@ -5,6 +5,10 @@ on:
     branches:
       - main
       - 'releases/*'
+    paths:
+      - 'src/**'
+      - 'tests/**'
+  workflow_dispatch:
 
 jobs:
   # unit tests
