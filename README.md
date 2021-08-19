@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2 
-      - uses: markpatterson27/markdown-to-output@main
+      - uses: markpatterson27/markdown-to-output@v1
         id: mto
         with:
           filepath: examples/project.md
