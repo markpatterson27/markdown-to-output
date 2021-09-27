@@ -34,5 +34,5 @@ jobs:
 
 | Output Name | Description |
 |---|---|
-| `attributes` | Array of parsed front matter attributes. |
+| `attributes` | Array of parsed front matter attributes. Attribute names are converted to lowercase kebab-case with special characters removed. |
 | `body` | Main body content of file. |
