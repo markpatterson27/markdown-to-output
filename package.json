@@ -30,9 +30,9 @@
     "slugify": "^1.6.1"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.33.0",
-    "eslint": "^8.4.0",
-    "jest": "^27.4.3"
+    "@vercel/ncc": "^0.33.1",
+    "eslint": "^8.6.0",
+    "jest": "^27.4.7"
   },
   "jest": {
     "testEnvironment": "node",
